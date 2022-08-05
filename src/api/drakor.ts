@@ -87,11 +87,6 @@ export const getCredentials = async (email: string, password?: string) => {
 	}
 	return credential;
 };
-// var searchOpt = {
-//     url: "https://rw1.drakor.id:443/m_by_search.php?version=3.6&key=941301bfce8fb05c314761ec7715a00e&hs=09fa00215116bd4884c4520cd27939ee&page=1&q=running%20man&limit=10&tipe=1&order=1",
-//     headers: searchHeaders,
-//     method: "GET",
-// }
 export const searchDrakor = async (query: string) => {
 	console.log("searching for " + query);
 	const url =
@@ -117,10 +112,7 @@ export const getEpisodes = async (showId: string) => {
 		"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 		"User-Agent":
 			"Dalvik/2.1.0 (Linux; U; Android 12; M2102J20SG Build/SQ3A.220705.003.A1)",
-		// 'Connection': "Keep-Alive",
 		"Accept-Encoding": "gzip, deflate",
-		// "Content-Length": "40",
-		// 'Cookie': drakoridCookie
 	};
 	const url = `https://rw1.drakor.id:443/get_episodes.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}`;
 	console.log("url", url);
@@ -139,7 +131,7 @@ export const getEpisodes = async (showId: string) => {
 
 export const getDownloadLinks = async (showId: string, streamingId: string) => {
 	console.log("getDownloadLinks", showId, streamingId);
-	const url = `https://rw1.drakor.id:443/generate_link_download_ep.php?key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&ep=28&aid=${showId}&premium=yes`;
+	const url = `https://rw1.drakor.id:443/generate_link_download_ep.php?key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&ep=28&aid=${showId}&premium=no`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
@@ -147,10 +139,7 @@ export const getDownloadLinks = async (showId: string, streamingId: string) => {
 			"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 			"User-Agent":
 				"Dalvik/2.1.0 (Linux; U; Android 12; M2102J20SG Build/SQ3A.220705.003.A1)",
-			// 'Connection': "Keep-Alive",
 			"Accept-Encoding": "gzip, deflate",
-			// "Content-Length": "40",
-			// 'Cookie': drakoridCookie
 		},
 		body: `powder=${generatePowder()}`,
 	});
@@ -164,10 +153,9 @@ export const getDownloadLinks = async (showId: string, streamingId: string) => {
 	return json as IDownloadLink;
 };
 
-//curl -s 'http://rw1.drakor.id/generate_link_cdn.php?tipe=download&key=941301bfce8fb05c314761ec7715a00e&id=42453&premium=yes' -b 'PHPSESSID=v3pknhfctu22feg70igvjuq4k5' -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-binary 'powder=22602f47c5ea7679cbd6f78a3c7eef43'
 export const getFastDownliadLinks = async (streamingId: string) => {
 	console.log("getFastDownliadLinks", streamingId);
-	const url = `https://rw1.drakor.id:443/generate_link_cdn.php?tipe=download&key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&premium=yes`;
+	const url = `https://rw1.drakor.id:443/generate_link_cdn.php?tipe=download&key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&premium=no`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
@@ -186,32 +174,10 @@ export const getFastDownliadLinks = async (streamingId: string) => {
 	return json as IDownloadLink;
 };
 
-// var burp0_bodyString = "powder=4e966fc7f512f53871ea8b04176240e3&"
-
-// var burp0_headers = {
-//     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-//     "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 12; M2102J20SG Build/SQ3A.220705.003.A1)",
-//     "Connection": "Keep-Alive",
-//     "Accept-Encoding": "gzip, deflate",
-//     "Content-Length": "40",
-//     'Cookie': burp0_cookie
-// }
-
-// var burp0_options = {
-//     url: "https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=3453&episode_number=1&premium=yes",
-//     headers: burp0_headers,
-//     method: "post",
-//     body: burp0_bodyString
-// }
-// request(burp0_options, function (error, response, body) {
-// console.log('statusCode:', response && response.statusCode)
-// console.log('error: ', error)
-// console.log('body: ', body)
-// })
 
 export const getStreamingId = async (showId: string, episodeNumber: string) => {
 	console.log("getEpisodeData", showId, episodeNumber);
-	const url = `https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}&episode_number=${episodeNumber}&premium=yes`;
+	const url = `https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}&episode_number=${episodeNumber}&premium=no`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
