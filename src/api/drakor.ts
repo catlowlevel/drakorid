@@ -131,7 +131,7 @@ export const getEpisodes = async (showId: string) => {
 
 export const getDownloadLinks = async (showId: string, streamingId: string) => {
 	console.log("getDownloadLinks", showId, streamingId);
-	const url = `https://rw1.drakor.id:443/generate_link_download_ep.php?key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&ep=28&aid=${showId}&premium=no`;
+	const url = `https://rw1.drakor.id:443/generate_link_download_ep.php?key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&ep=28&aid=${showId}&premium=yes`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
@@ -155,7 +155,7 @@ export const getDownloadLinks = async (showId: string, streamingId: string) => {
 
 export const getFastDownliadLinks = async (streamingId: string) => {
 	console.log("getFastDownliadLinks", streamingId);
-	const url = `https://rw1.drakor.id:443/generate_link_cdn.php?tipe=download&key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&premium=no`;
+	const url = `https://rw1.drakor.id:443/generate_link_cdn.php?tipe=download&key=941301bfce8fb05c314761ec7715a00e&id=${streamingId}&premium=yes`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
@@ -177,7 +177,7 @@ export const getFastDownliadLinks = async (streamingId: string) => {
 
 export const getStreamingId = async (showId: string, episodeNumber: string) => {
 	console.log("getEpisodeData", showId, episodeNumber);
-	const url = `https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}&episode_number=${episodeNumber}&premium=no`;
+	const url = `https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}&episode_number=${episodeNumber}&premium=yes`;
 	console.log("url", url);
 	const response = await fetch(url, {
 		method: "POST",
