@@ -3,7 +3,7 @@ const cache = {};
 
 /**
  * @param {string} query Query
- * @returns {Promise<{id : string,title : string}[]>} array of result
+ * @returns {Promise<{id : string,title : string, image : string}[]>} array of result
  */
 export const search = async (query) => {
     try {
@@ -11,7 +11,7 @@ export const search = async (query) => {
             console.log(`Using cache for ${query}`);
             return cache[query];
         }
-        const response = await fetch("/search", {
+        const response = await fetch("/api/v1/search", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +40,7 @@ export const getEpisodes = async (showId) => {
             console.log(`Using cache for ${showId}`);
             return cache[showId];
         }
-        const response = await fetch("/episodes",
+        const response = await fetch("/api/v1/episodes",
             {
                 method: "POST",
                 headers: {
@@ -72,7 +72,7 @@ export const getEpisodes = async (showId) => {
             console.log(`Using cache for ${showId}_${epsNumber}`);
             return cache[`${showId}_${epsNumber}`];
         }
-        const response = await fetch("/download",
+        const response = await fetch("/api/v1/download",
             {
                 method: "POST",
                 headers: {
@@ -107,7 +107,7 @@ export const getEpisodes = async (showId) => {
             console.log(`Using cache for fast_${showId}_${epsNumber}`);
             return cache[`fast_${showId}_${epsNumber}`];
         }
-        const response = await fetch("/fast_download",
+        const response = await fetch("/api/v1/fast_download",
             {
                 method: "POST",
                 headers: {

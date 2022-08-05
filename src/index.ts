@@ -17,8 +17,8 @@ app.get("/", (_req, res) => {
 	res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/search", async (req, res) => {
-	console.log("Request made on /search");
+app.post("/api/v1/search", async (req, res) => {
+	console.log("Request made on /api/v1/search");
 	try {
 		const { query } = req.body;
 		const result = await searchDrakor(query);
@@ -30,8 +30,8 @@ app.post("/search", async (req, res) => {
 	}
 });
 
-app.post("/episodes", async (req, res) => {
-	console.log("Request made on /episodes");
+app.post("/api/v1/episodes", async (req, res) => {
+	console.log("Request made on /api/v1/episodes");
 	try {
 		const { showId } = req.body;
 		const result = await getEpisodes(showId);
@@ -43,8 +43,8 @@ app.post("/episodes", async (req, res) => {
 	}
 });
 
-app.post("/download", async (req, res) => {
-	console.log("Request made on /download");
+app.post("/api/v1/download", async (req, res) => {
+	console.log("Request made on /api/v1/download");
 	try {
 		const { showId, epsNumber } = req.body;
 		const streamingId = await getStreamingId(showId, epsNumber);
@@ -57,7 +57,7 @@ app.post("/download", async (req, res) => {
 	}
 });
 
-app.post("/fast_download", async (req, res) => {
+app.post("/api/v1/fast_download", async (req, res) => {
 	console.log("Request made on /fast_download");
 	try {
 		const { showId, epsNumber } = req.body;
