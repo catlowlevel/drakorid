@@ -28,6 +28,7 @@ async function handleDownloadLink(showId, epsNumber) {
         })
     } catch (error) {
         downloadList.innerHTML = "Error";
+        console.log(error);
         setTimeout(() => downloadList.innerHTML = "", 1000)
     }
 }
@@ -50,6 +51,7 @@ async function handleGetEpisodes(showId) {
         })
     } catch (error) {
         ulEps.innerHTML = "Error";
+        console.log(error);
         setTimeout(() => ulEps.innerHTML = "", 1000)
     }
 }
