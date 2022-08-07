@@ -3,19 +3,20 @@ import {
 	getDownloadLinks,
 	getEpisodes,
 	getFastDownliadLinks,
-	getStreamingId,
+	getStreamingInfo,
 	searchDrakor,
-} from "./api/drakor";
-
+} from "./api/drakor.js";
+//@ts-ignore
+import { handler } from "./frontend/build/handler.js";
 const app = Express();
 
 app.use(Express.json());
 
-app.use(Express.static("public/"));
+// app.use(Express.static("public/"));
 
-app.get("/", (_req, res) => {
-	res.sendFile(__dirname + "/index.html");
-});
+// app.get("/", (_req, res) => {
+// 	res.sendFile(__dirname + "/index.html");
+// });
 
 app.post("/api/v1/search", async (req, res) => {
 	console.log("Request made on /api/v1/search");
@@ -47,9 +48,9 @@ app.post("/api/v1/download", async (req, res) => {
 	console.log("Request made on /api/v1/download");
 	try {
 		const { showId, epsNumber } = req.body;
-		const streamingId = await getStreamingId(showId, epsNumber);
-		const result = await getDownloadLinks(showId, streamingId);
-		res.json(result);
+		const streamingInfo = (await getStreamingInfo(showId, epsNumber)) as any;
+		const result = await getDownloadLinks(showId, streamingInfo.streaming);
+		res.json({ ...result, streamingInfo: { ...streamingInfo } });
 	} catch (error) {
 		//send error to client
 		console.log("error", error);
@@ -61,15 +62,16 @@ app.post("/api/v1/fast_download", async (req, res) => {
 	console.log("Request made on /fast_download");
 	try {
 		const { showId, epsNumber } = req.body;
-		const streamingId = await getStreamingId(showId, epsNumber);
-		const result = await getFastDownliadLinks(streamingId);
-		res.json(result);
+		const streamingInfo = (await getStreamingInfo(showId, epsNumber)) as any;
+		const result = await getFastDownliadLinks(streamingInfo.streaming);
+		res.json({ ...result, streamingInfo: { ...streamingInfo } });
 	} catch (error) {
 		//send error to client
 		console.log("error", error);
 		res.status(500).send(error.message);
 	}
 });
+app.use(handler);
 
 app.listen(3000, () => {
 	console.log("Server is running on port 3000");

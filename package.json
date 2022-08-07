@@ -2,10 +2,11 @@
 	"name": "new-ts-template",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"exports":"./index.js",
+	"type": "module",
 	"scripts": {
 		"start": "npm run build && node dist/index.js",
-		"dev": "nodemon --watch src --ext js,ts --exec node --no-warnings --loader ts-node/esm src/index.ts",
+		"dev": "nodemon --watch src --watch frontend/build/handler.js --delay 0.5 --ext js,ts --exec node --no-warnings --loader ts-node/esm src/index.ts",
 		"build": "tsc"
 	},
 	"keywords": [],

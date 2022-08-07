@@ -75,12 +75,18 @@ btnSearch.addEventListener("click", async () => {
         // title: "Big Mouth (2022)"
         // title_eps: "Big Mouth (2022)"
         const li = document.createElement("li");
-        li.innerHTML = `
-            <input type="button" value="${item.title}">
-            <ul id="epsList" class="showId${item.id}"></ul>
-       `
+        
+        const btn = document.createElement("input");
+        btn.type = "button";
+        btn.value = item.title;
+        btn.addEventListener("click", () => handleGetEpisodes(item.id));
+        li.appendChild(btn);
+
+        const ul = document.createElement("ul");
+        ul.classList.add(`showId${item.id}`);
+        ul.id = "epsList";
+        li.appendChild(ul);
+
         listResult.appendChild(li);
-        const button = li.children[0];
-        button.addEventListener("click", () => handleGetEpisodes(item.id));
     })
 })

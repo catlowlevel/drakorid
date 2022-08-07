@@ -1,7 +1,7 @@
 import { createCipheriv } from "crypto";
 import { readFileSync, writeFileSync } from "fs";
 import { fetch } from "undici";
-import { ICredential, IDownloadLink, IEpisode, ISearch } from "./types";
+import { ICredential, IDownloadLink, IEpisode, ISearch } from "./types.js";
 
 const powderCache = {
 	powder: "",
@@ -67,7 +67,7 @@ export const getCredentials = async (email: string, password?: string) => {
 		headers: drakorHeaders,
 		method: "GET",
 	};
-	console.log('url', loginOpt.url);
+	console.log("url", loginOpt.url);
 	const response = await fetch(loginOpt.url, {
 		headers: loginOpt.headers,
 		method: loginOpt.method,
@@ -116,7 +116,7 @@ export const getEpisodes = async (showId: string) => {
 	};
 	const url = `https://rw1.drakor.id:443/get_episodes.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}`;
 	console.log("url", url);
-	
+
 	const response = await fetch(url, {
 		headers: getEpisodesHeader,
 		method: "GET",
@@ -174,8 +174,10 @@ export const getFastDownliadLinks = async (streamingId: string) => {
 	return json as IDownloadLink;
 };
 
-
-export const getStreamingId = async (showId: string, episodeNumber: string) => {
+export const getStreamingInfo = async (
+	showId: string,
+	episodeNumber: string
+) => {
 	console.log("getEpisodeData", showId, episodeNumber);
 	const url = `https://rw1.drakor.id:443/get_data_episode.php?key=941301bfce8fb05c314761ec7715a00e&id=${showId}&episode_number=${episodeNumber}&premium=yes`;
 	console.log("url", url);
@@ -199,5 +201,5 @@ export const getStreamingId = async (showId: string, episodeNumber: string) => {
 	}
 
 	const json = await response.json();
-	return (json as any).streaming as string;
+	return json;
 };
