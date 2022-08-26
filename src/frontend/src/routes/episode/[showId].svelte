@@ -77,9 +77,9 @@
 				</div>
 			{/if}
 			{#if epsImg.length > 0 && epsStream.length > 0}
-				<a target="_blank" rel="noopener noreferrer" href={epsStream}>
-					<img src={epsImg} alt="thumb" width="80%" />
-				</a>
+				<!-- <a target="_blank" rel="noopener noreferrer" href={epsStream}> -->
+				<img src={epsImg} alt="thumb" width="80%" />
+				<!-- </a> -->
 			{/if}
 		</div>
 	{/if}
